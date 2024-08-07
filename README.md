@@ -19,7 +19,7 @@ const isUser = (value: unknown): value is User => true; // ts doesn't write erro
 ```
 [link to playground](https://www.typescriptlang.org/play/?#code/C4TwDgpgBAqgzhATlAvFA3gKClArgxAOwEMBbCALijmEQEtCBzAGmykQHsAbSqAckQRGuLsWT4kfKAB9+pDgBMkxYB0RTZfYgtIM6NRCrV9MAXwDcmTAGMOhGlH3wkqKAAoAbsS65euQgDWhBwA7oQAlFRePtD6sASoAHxQtL7mUAD0GSlwUAocEHCEfMBQIfTA0EiciEA)
 
-Irakli Safareli suggests [his solution](https://safareli.com/blog/stricter-and-safer-type-guards-in-typescript/) of this problem. The point of the methodic is that manual type guards are not created directly, but make by special function `is`. It is the wonderful methodic, and it allows return strictness to code with separate type checks.
+Irakli Safareli suggests [his solution](https://safareli.com/blog/stricter-and-safer-type-guards-in-typescript/) of this problem. The point of the technique is that manual type guards are not created directly, but made by special function `is`. It is a wonderful technique, and it allows return strictness to code with separate type checks.
 
 ```typescript
 type User = {
@@ -48,7 +48,7 @@ const isUser = is<unknown, User>(value => {
 
 [link to playground](https://www.typescriptlang.org/play/?#code/C4TwDgpgBAqgzhATlAvFA3gKClArgxAOwEMBbCALijmEQEtCBzAGmykQHsAbSqAckQRGuLsWT4kfKAB9+pDgBMkxYB0RTZfYgtIM6NRCrV9MAXwDcmTAGMOhGlH2ooAHgDqdJcygA5MZwB3KAgAD2AIQgU4KA8lAD4ACjYwQQU6axVeBIA3Yi5cXliIAEpUON9-DiDZUEgOADNHOEJgVlKUcpy8gqoi4qpc-OgnP0RAsqgUiDSM8K6h0oBCFDR9Fstbe2AmlucAZRBSACNuBL4AAX0AejWAHT5gPmLLGzsHfQB5I4ArZ30XXCEADWhCqhG8HB+EGswESgwKEySOFqEAaUHh0BWaD4kO+0MeUAAZIT0d1oAB+UlDKBUNbATDFZ5WTbvODwJB-OAA4GggLg2AEOFkiZYHB0RoJRYJT4-eYFUrE-gSIhkCBSBhUhGKgTcNWOQiakqlQTAXBEHbASw4FnbdB4AgkcjeTg8KCmZwYq2OCVSlFo5WOzErfgGBiMEw4HCKhIuoPYwTCUTiAgaWSx1DBvjyJSGVTqGRp3UZ7HaXSEfS0IzqYpsRnsCCm810r0ms0Gu0B1XOosWMxMzBAA)
 
-However, problem exists in TypeScript even after this solution. This methodic doesn't catch false-negative errors. Thus we need unit tests for any manual type guard.
+However, problem exists in TypeScript even after this solution. This technique doesn't catch false-negative errors. Thus, we need unit tests for any manual type guard.
 
 ```typescript
 const isUser = is<unknown, User>(value => {
@@ -96,7 +96,7 @@ Ts write an error in the case when one variant was skipped
 
 [link to playground](https://www.typescriptlang.org/play/?#code/C4TwDgpgBAqgzhATlAvFA3gKClArgxAOwEMBbCALijmEQEtCBzAGmykQHsAbSqAckQRGuLsWT4kfKAB9+pDgBMkxYB0RTZfYgtIM6NRCrV9MAXwDcmTAGMOhGlH2ooAHgDqdJcygA5MZwB3KAgAD2AIQgU4KA8lAD4ACjYwQQU6axVeBIA3Yi5cXliIAEpUON9-DiDZUEgOADNHOEJgVlKUcpy8gqoi4qpc-OgnP0RAsqgUiDSM8K6h0oBCFDR9Fstbe2AmlucAZRBSACNuBL4AAX0AejWAHT5gPmLLTFCwNW3Nh2tBTL3adLAACS0TQLjYRVYOFG41C4Ui0UhmES7XKLgAShBgLgiMEwhEohUxlUZFBahAGjtgIk2DgpjNMlR5j0Yp4ShNMdiiFCcFArldgnAuAxgABaNJwYhHHiiwhw0XCuVQc7kuA-OhgMUQIUiq6EDii3CECQKUW5RBwWlQAD61gAFhBrABrKgAbRhJJq4ApjTWwAAunj4YTXZycYRAwB+fi2UhgHjhKRUOXZJA81FQZmFNn9KCDApNInjDqTVLpTJZpYrKkvGx2Bz6ADyRwAVs59C4jU79QFCN4OK3HdSsxMkjhyZT89AVmg+AOW0OpAAyJd57rQaNTqBUP2YYrPKxfbb6eBIf70azbNA-CB-AGXkGdwjdqp92AEFEjktYHB0RoJRYEibVtKygFd+AkIgyAgKQGDXIYwNXARuBgxxCHggp93YLFwxrNgjwwPACBIchvE4HgoFMZwp0sX9-0AidGkgkjp2rPgDAYRgTF5RDM3I1jZ3kJRDFUdQZFkfjUDY7RdEIfRaCMdRijYLDBC5dC-Vo7D1MI5joLIlDKMsUxvD4WN4yxGCDyAA)
 
-But this error has booleanlike type. Detail errors are preferred. The last version of the method may evolve and use type checking via return type.
+But this error has booleanlike type. Detail errors are preferred. The last version of the technique may evolve and use type checking via return type.
 
 ```typescript
 export const createDetailsStrictIs = <
