@@ -1,0 +1,12 @@
+.idea/
+node_modules/
+dist/
+misc/
+.ts-node/
+*.swp
+*.zip
+*.log
+*.backup.*
+*.cancel.*
+*.service.*
+*.message.*
