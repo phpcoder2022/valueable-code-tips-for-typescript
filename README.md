@@ -48,7 +48,7 @@ const isUser = is<unknown, User>(value => {
 
 [link to playground](https://www.typescriptlang.org/play/?#code/C4TwDgpgBAqgzhATlAvFA3gKClArgxAOwEMBbCALijmEQEtCBzAGmykQHsAbSqAckQRGuLsWT4kfKAB9+pDgBMkxYB0RTZfYgtIM6NRCrV9MAXwDcmTAGMOhGlH2ooAHgDqdJcygA5MZwB3KAgAD2AIQgU4KA8lAD4ACjYwQQU6axVeBIA3Yi5cXliIAEpUON9-DiDZUEgOADNHOEJgVlKUcpy8gqoi4qpc-OgnP0RAsqgUiDSM8K6h0oBCFDR9Fstbe2AmlucAZRBSACNuBL4AAX0AejWAHT5gPmLLGzsHfQB5I4ArZ30XXCEADWhCqhG8HB+EGswESgwKEySOFqEAaUHh0BWaD4kO+0MeUAAZIT0d1oAB+UlDKBUNbATDFZ5WTbvODwJB-OAA4GggLg2AEOFkiZYHB0RoJRYJT4-eYFUrE-gSIhkCBSBhUhGKgTcNWOQiakqlQTAXBEHbASw4FnbdB4AgkcjeTg8KCmZwYq2OCVSlFo5WOzErfgGBiMEw4HCKhIuoPYwTCUTiAgaWSx1DBvjyJSGVTqGRp3UZ7HaXSEfS0IzqYpsRnsCCm810r0ms0Gu0B1XOosWMxMzBAA)
 
-However, problem exists in TypeScript even after this solution. This technique doesn't catch false-negative errors. Thus, we need unit tests for any manual type guard.
+However, problem exists in TypeScript even after this solution. This technique doesn't catch false-negative errors. Thus, you need unit tests for any manual type guard. But unit tests check only cases that you wrote. If you added a variant to type after, and forgot to add it to type guard, then you will forget to add it to the unit test too.
 
 ```typescript
 const isUser = is<unknown, User>(value => {
