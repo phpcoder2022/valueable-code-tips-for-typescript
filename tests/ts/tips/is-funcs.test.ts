@@ -1,14 +1,11 @@
 import { tricklyUseVariablesThenCompilatorWontScold } from '../../../src/ts/tricks';
+import { isObj } from '../../../src/ts/type-guards';
 import { createDetailsStrictIs, createStrictIs, identityFunc, is, isnt } from '../../../src/ts/tips/is-funcs';
 
 type User = {
   username: string,
   role: 'regular user' | 'moderator' | 'administrator'
 };
-
-const isObj = is<unknown, object>(value => (
-  typeof value === 'object' && value ? value : isnt
-));
 
 const isUser = is<unknown, User>(value => {
   if (!(isObj(value) && 'username' in value && 'role' in value)) return isnt;
