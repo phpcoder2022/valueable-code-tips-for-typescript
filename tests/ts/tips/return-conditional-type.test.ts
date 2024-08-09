@@ -8,6 +8,40 @@ import { excludedKeys } from '../../../src/ts/consts';
 import { typedIncludes } from '../../../src/ts/funcs';
 import { isObj } from '../../../src/ts/type-guards';
 
+describe('basic example', () => {
+  /** Stub */
+  const getCharacretisticA = () => 'a' as const;
+  /** Stub */
+  const getCharacretisticB = () => 'b' as const;
+  /** Stub. The function takes a long time to execute. */
+  const getCharacteristicC = () => 'c' as const;
+  type AB = { a: string, b: string };
+  type ABC = AB & { c: string };
+  const getCharacteristicManual = <Mode extends 'ab' | 'abc'>(mode: Mode): Mode extends 'ab' ? AB : ABC => {
+    const ab: AB = { a: getCharacretisticA(), b: getCharacretisticB() };
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return (mode === 'ab' ? ab : { ...ab, c: getCharacteristicC() }) as Mode extends 'ab' ? AB : ABC;
+  };
+  const getCharacteristicsCreated = <Mode extends 'ab' | 'abc'>(mode: Mode): Mode extends 'ab' ? AB : ABC => {
+    const ab: AB = { a: getCharacretisticA(), b: getCharacretisticB() };
+    const cond = 'ab';
+    return returnConditionalType<typeof cond>()(
+      mode,
+      mode => mode === cond ? cond : FalseResultSymbol,
+      () => ab,
+      () => ({ ...ab, c: getCharacteristicC() }),
+    );
+  };
+
+  (['ab', 'abc'] as const).forEach(mode => {
+    test(mode, () => {
+      const expectedResult = { a: 'a', b: 'b', ...(mode === 'ab' ? {} : { c: 'c' } as const) } as const;
+      expect({ manual: getCharacteristicManual(mode), created: getCharacteristicsCreated(mode) })
+        .toStrictEqual({ manual: expectedResult, created: expectedResult });
+    });
+  });
+});
+
 describe('entries', () => {
   type OldEntryType = 'a' | 'b' | 'c';
   type OldEntry = {
